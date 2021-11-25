@@ -23,4 +23,17 @@ function createEmptyBoard(dimension) {
 
 let boardDimension = 5;
 
-console.log(createEmptyBoard(boardDimension));
+board = createEmptyBoard(boardDimension)  // ?
+console.log(board);
+
+let player_01_positions = ["A4", "A2", "A3", "B4", "B5", "C1", "D3", "E5"]
+
+player_01_positions.forEach(element => modifyBoard(element));
+
+console.log(board);
+
+function modifyBoard(position){
+    let row = position.charCodeAt(0) - 65
+    board[row][position[1]-1] = 1;
+    // console.log(row)
+}

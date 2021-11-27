@@ -36,8 +36,27 @@ function generateBoard(boardDimension, player_positions){
 }
 
 let boardDimension = 5;
+let fleetElements = 8;
 let player_01_positions = ["A4", "A2", "A3", "B4", "B5", "C1", "D3", "E5"];
 let player_02_positions = ["A1", "A2", "B1", "B2", "B3", "C2", "D3", "E1"];
+let cpu_positions = generateCpuPositions(fleetElements, boardDimension)
+
+function generateCpuPositions(fleetElements, boardDimension) {
+    let cpu_positions = []
+    for (let i= 0; i < fleetElements; i++) {
+        // Returns a random integer between min (include) and max (include)
+        let number = Math.floor(Math.random() * (boardDimension - 1 + 1)) + 1;
+        let row = String.fromCharCode(number + 64);
+        let col = Math.floor(Math.random() * (boardDimension - 1 + 1)) + 1;
+        let position = row + col
+        if (cpu_positions.includes(position)) {
+            i--;
+            continue
+        }
+        cpu_positions.push(position)
+    }
+    return cpu_positions.sort()
+}
 
 // Player 01 Board
 let player_01_board = generateBoard(boardDimension, player_01_positions);
@@ -45,10 +64,11 @@ let player_01_board = generateBoard(boardDimension, player_01_positions);
 // Player 02 Board
 let player_02_board = generateBoard(boardDimension, player_02_positions);
 
+// Cpu Board
+let cpu_board = generateBoard(boardDimension, cpu_positions);
 
-
-console.log(player_01_board);
-console.log(player_02_board);
+// console.log(player_01_board);
+// console.log(player_02_board);
 
 
 function fire(player_defender_positions, player_defender_board, player_attacker, player_attacker_move){
@@ -65,7 +85,7 @@ function fire(player_defender_positions, player_defender_board, player_attacker,
     }
 }
 
-
+/*
 fire(player_02_positions, player_02_board, "Player 01",  "A1");
 fire(player_02_positions, player_02_board, "Player 01",  "A2");
 fire(player_02_positions, player_02_board, "Player 01",  "B1");
@@ -77,3 +97,7 @@ fire(player_02_positions, player_02_board, "Player 01",  "D3");
 fire(player_02_positions, player_02_board, "Player 01",  "E1");
 
 console.log(player_02_board);
+*/
+
+console.log(cpu_positions)
+console.log(cpu_board)
